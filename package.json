@@ -2,24 +2,9 @@
   "name": "tetris",
   "version": "1.0.0",
   "description": "",
-  "scripts": {
-    "start": "webpack --watch",
-    "build": "webpack"
-  },
+  "scripts": {},
   "author": "Tom",
   "license": "MIT",
   "dependencies": {},
-  "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.1",
-    "copy-webpack-plugin": "^4.4.1",
-    "css-loader": "^0.28.9",
-    "html-loader": "^0.5.5",
-    "less": "^3.0.1",
-    "less-loader": "^4.0.5",
-    "style-loader": "^0.20.2",
-    "webpack": "^4.0.1",
-    "webpack-cli": "^2.0.9"
-  }
+  "devDependencies": {}
 }
