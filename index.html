@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="dist/index.css">
+	<link rel="stylesheet" href="src/index.css">
 	<title>tetris</title>
 </head>
 <body>
 
 <div id="tetris"></div>
 
-<script src="dist/index.js"></script>
+
+
+<script type="module">
+
+import Tetris from './src/index.js';
+window.tetris = new Tetris(document.querySelector('#tetris'));
+window.tetris.tick();
+
+</script>
 
 </body>
 </html>
