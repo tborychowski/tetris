@@ -1,0 +1,26 @@
+body { box-sizing: border-box; }
+body * { box-sizing: inherit; }
+
+:root {
+	--brick-size: 20px;
+	--brick-spacing: 1px;
+}
+
+
+.bucket {
+	position: relative;
+	display: grid;
+	grid-template-columns: repeat(10, var(--brick-size));
+	grid-template-rows: repeat(20, var(--brick-size));
+	grid-gap: var(--brick-spacing);
+	border: 7px ridge #333;
+	float: left;
+}
+
+
+
+.bucket-cell {
+	width: var(--brick-size);
+	height: var(--brick-size);
+	background: #eee;
+}
