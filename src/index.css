@@ -1,4 +1,4 @@
-body { box-sizing: border-box; }
+body { box-sizing: border-box; font: 14px sans-serif; }
 body * { box-sizing: inherit; }
 
 :root {
@@ -23,4 +23,34 @@ body * { box-sizing: inherit; }
 	width: var(--brick-size);
 	height: var(--brick-size);
 	background: #eee;
+}
+
+
+.control-panel {
+	float: left;
+	width: calc((var(--brick-size) + var(--brick-spacing)) * 10 + 13px);
+	height: calc((var(--brick-size) + var(--brick-spacing)) * 20 + 13px);
+	border: 7px ridge #333;
+	display: flex;
+	flex-flow: column;
+}
+
+.next-block {
+	background: #eee;
+	height: calc((var(--brick-size) + var(--brick-spacing)) * 6);
+	margin: 0;
+}
+
+.points {
+	background: #eee;
+	text-align: center;
+	padding: 20px 0;
+	font-size: 30px;
+	border-top: 1px solid #999;
+}
+
+.controls {
+	background: #eee;
+	flex: 1;
+	border-top: 1px solid #999;
 }

@@ -10,15 +10,57 @@ export default class Tetris {
 		target.innerHTML = utils.getHtml(BOARD_W, BOARD_H);
 
 		this.el = target.querySelector('.bucket');
+		this.nextEl = target.querySelector('.control-panel .next-block');
+		this.pointsEl = target.querySelector('.control-panel .points');
 
-
-		// this.flatCells = this.el.querySelectorAll('.bucket-cell');
-		// this.flatMap = Array(BOARD_W * BOARD_H).fill(null);
-
-		this.cells = utils.mapCells(this.flatCells);
-		this.currentBlock = utils.getRandomBlock();
+		this.cells = utils.mapCells(this.el.querySelectorAll('.bucket-cell'));
+		this.getNextBlock();
+		this.addPoints(0);
 		this.onKey = this.onKey.bind(this);
-		document.addEventListener('keydown', this.onKey);
+		window.addEventListener('keydown', this.onKey);
+	}
+
+	start () {
+		this.isOver = false;
+		this.tick();
+	}
+
+	gameOver () {
+		this.isOver = true;
+		console.log('game over');
+	}
+
+
+	tick (delay = 500) {
+		if (this.isOver) return;
+		this.drawBlock(false);
+		if (this.currentBlock && this.canGo('down')) {
+			this.currentBlock.y++;
+			this.drawBlock(true);
+		}
+		else {
+			this.drawBlock(true);
+			this.checkFullRows();
+			this.getNextBlock();
+			if (!this.canGo('down')) this.gameOver();
+			else delay += 300;
+		}
+		if (this.timer) clearTimeout(this.timer);
+		if (!this.isOver) this.timer = setTimeout(() => this.tick(), delay);
+	}
+
+
+
+
+	getNextBlock () {
+		this.currentBlock = Object.assign({}, this.nextBlock || utils.getRandomBlock());
+		this.nextBlock = utils.getRandomBlock();
+		this.nextEl.innerHTML = this.nextBlock.type;
+	}
+
+	addPoints (n = 1) {
+		this.points = (this.points || 0) + n;
+		this.pointsEl.innerHTML = this.points;
 	}
 
 
@@ -55,7 +97,6 @@ export default class Tetris {
 		if (!this.canGo()) {
 			if (this.canGo('right')) this.currentBlock.x += 1;
 			else if (this.canGo('left')) this.currentBlock.x -= 1;
-			else if (this.canGo('left', 2)) this.currentBlock.x -= 2;
 		}
 		this.drawBlock(true);
 	}
@@ -64,24 +105,6 @@ export default class Tetris {
 	slide () {
 		this.tick(100);
 	}
-
-
-	tick (delay = 500) {
-		this.drawBlock(false);
-		if (this.currentBlock && this.canGo('down')) {
-			this.currentBlock.y++;
-			this.drawBlock(true);
-		}
-		else {
-			this.drawBlock(true);
-			this.currentBlock = utils.getRandomBlock();
-			this.checkFullRows();
-			delay += 300;
-		}
-		if (this.timer) clearTimeout(this.timer);
-		this.timer = setTimeout(() => this.tick(), delay);
-	}
-
 
 	getBlockCells (offsetX, offsetY) {
 		const cells = [];
@@ -156,6 +179,7 @@ export default class Tetris {
 		}
 
 		this.drawBlock(true);
+		this.addPoints();
 	}
 
 

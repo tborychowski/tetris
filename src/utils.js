@@ -7,7 +7,12 @@ function getHtml (w = 10, h = 20) {
 	const cell = '<div class="bucket-cell"></div>';
 	const row = Array(w).fill(cell).join('');
 	const rows = Array(h).fill(row).join('');
-	return `<div class="bucket">${rows}</div>`;
+	return `<div class="bucket">${rows}</div>
+		<div class="control-panel">
+			<div class="next-block"></div>
+			<div class="points">0</div>
+			<div class="controls"></div>
+		</div>`;
 }
 
 
