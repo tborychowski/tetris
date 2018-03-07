@@ -3,7 +3,7 @@ import blocks from './blocks';
 
 const rand = (max, min = 0) => Math.floor(Math.random() * (max - min + 1) + min);
 
-function getTemplate () {
+function getHtml () {
 	const cell = '<div class="bucket-cell"></div>';
 	const row = Array(10).fill(cell).join('');
 	const rows = Array(20).fill(row).join('');
@@ -38,7 +38,7 @@ function getRandomBlock () {
 
 export default {
 	rand,
-	getTemplate,
+	getHtml,
 	mapCells,
 	getRandomBlock,
 };

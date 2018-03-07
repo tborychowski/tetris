@@ -5,7 +5,7 @@ export default class Tetris {
 
 	constructor (target) {
 		if (!target) throw new Error('Invalid target container!');
-		target.innerHTML = utils.getTemplate();
+		target.innerHTML = utils.getHtml();
 
 		this.el = target.querySelector('.bucket');
 		this.cells = utils.mapCells(this.el.querySelectorAll('.bucket-cell'));
