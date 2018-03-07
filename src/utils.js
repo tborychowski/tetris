@@ -3,10 +3,10 @@ import blocks from './blocks';
 
 const rand = (max, min = 0) => Math.floor(Math.random() * (max - min + 1) + min);
 
-function getHtml () {
+function getHtml (w = 10, h = 20) {
 	const cell = '<div class="bucket-cell"></div>';
-	const row = Array(10).fill(cell).join('');
-	const rows = Array(20).fill(row).join('');
+	const row = Array(w).fill(cell).join('');
+	const rows = Array(h).fill(row).join('');
 	return `<div class="bucket">${rows}</div>`;
 }
 
@@ -30,7 +30,7 @@ function getRandomBlock () {
 	const block = Object.assign({}, blocks[rand(blocks.length - 1)]);
 	block.pattern = rand(block.patterns.length - 1);
 	block.x = Math.floor((10 - block.patterns[block.pattern].length) / 2);
-	block.y = -block.patterns[block.pattern].length;
+	block.y = -1;
 	return block;
 }
 

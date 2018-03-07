@@ -2,7 +2,7 @@ body { box-sizing: border-box; }
 body * { box-sizing: inherit; }
 
 :root {
-	--brick-size: 20px;
+	--brick-size: 10px;
 	--brick-spacing: 1px;
 }
 

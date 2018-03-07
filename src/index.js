@@ -1,14 +1,21 @@
 import utils from './utils';
 
+const BOARD_W = 10;
+const BOARD_H = 20;
 
 export default class Tetris {
 
 	constructor (target) {
 		if (!target) throw new Error('Invalid target container!');
-		target.innerHTML = utils.getHtml();
+		target.innerHTML = utils.getHtml(BOARD_W, BOARD_H);
 
 		this.el = target.querySelector('.bucket');
-		this.cells = utils.mapCells(this.el.querySelectorAll('.bucket-cell'));
+
+
+		// this.flatCells = this.el.querySelectorAll('.bucket-cell');
+		// this.flatMap = Array(BOARD_W * BOARD_H).fill(null);
+
+		this.cells = utils.mapCells(this.flatCells);
 		this.currentBlock = utils.getRandomBlock();
 		this.onKey = this.onKey.bind(this);
 		document.addEventListener('keydown', this.onKey);
@@ -49,7 +56,6 @@ export default class Tetris {
 			if (this.canGo('right')) this.currentBlock.x += 1;
 			else if (this.canGo('left')) this.currentBlock.x -= 1;
 			else if (this.canGo('left', 2)) this.currentBlock.x -= 2;
-			else if (this.canGo('left', 3)) this.currentBlock.x -= 3;
 		}
 		this.drawBlock(true);
 	}
@@ -70,6 +76,7 @@ export default class Tetris {
 			this.drawBlock(true);
 			this.currentBlock = utils.getRandomBlock();
 			this.checkFullRows();
+			delay += 300;
 		}
 		if (this.timer) clearTimeout(this.timer);
 		this.timer = setTimeout(() => this.tick(), delay);
@@ -117,6 +124,10 @@ export default class Tetris {
 		}
 		return true;
 	}
+
+
+
+
 
 
 	checkFullRows () {
